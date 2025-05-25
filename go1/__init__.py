@@ -12,6 +12,21 @@ from . import agents
 ##
 
 # =============================== #
+# DREAMWAQ Rough
+# =============================== #
+
+gym.register(
+    id="Isaac-Velocity-Rough-Unitree-Go1-Dreamwaq-Direct-v0",
+    entry_point=f"{__name__}.unitree_go1_env:UnitreeGo1WaqEnv", # TODO modify env
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.unitree_go1_cfg:UnitreeGo1RoughWaqEnvCfg", # TODO modify env cfg
+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:UnitreeGo1WaqPPORunnerCfg",
+    },
+)
+
+
+# =============================== #
 # RSL-RL Flat
 # =============================== #
 
@@ -61,16 +76,3 @@ gym.register(
     },
 )
 
-# =============================== #
-# Dreamwaq
-# =============================== #
-
-gym.register(
-    id="Isaac-Velocity-Rough-Unitree-Go1-Dreamwaq-Direct-v0",
-    entry_point=f"{__name__}.unitree_go1_env:UnitreeGo1Env",
-    disable_env_checker=True,
-    kwargs={
-        "env_cfg_entry_point": f"{__name__}.unitree_go1_cfg:UnitreeGo1RoughEnvCfg",
-        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:UnitreeGo1DreamwaqPPORunnerCfg",
-    },
-)

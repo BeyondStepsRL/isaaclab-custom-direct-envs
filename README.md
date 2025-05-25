@@ -46,3 +46,8 @@ pip3 install .
 
 ### 알고리즘 리스트
 - [DreamwaQ](algorithms/dreamwaq)
+
+
+```
+python run/train.py --task=Isaac-Velocity-Rough-Unitree-Go1-Dreamwaq-Direct-v0 --video --video_interval 500 --video_length 250 --num_envs 1
+```

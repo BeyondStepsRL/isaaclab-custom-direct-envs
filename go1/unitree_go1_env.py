@@ -16,6 +16,9 @@ from isaaclab.sensors import ContactSensor, RayCaster
 from .unitree_go1_cfg import UnitreeGo1FlatEnvCfg, UnitreeGo1RoughEnvCfg
 
 
+
+
+
 class UnitreeGo1Env(DirectRLEnv):
     cfg: UnitreeGo1FlatEnvCfg | UnitreeGo1RoughEnvCfg
 
@@ -193,3 +196,7 @@ class UnitreeGo1Env(DirectRLEnv):
         extras["Episode_Termination/base_contact"] = torch.count_nonzero(self.reset_terminated[env_ids]).item()
         extras["Episode_Termination/time_out"] = torch.count_nonzero(self.reset_time_outs[env_ids]).item()
         self.extras["log"].update(extras)
+
+
+class UnitreeGo1WaqEnv(UnitreeGo1Env):
+    pass

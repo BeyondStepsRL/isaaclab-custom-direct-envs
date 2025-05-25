@@ -232,3 +232,10 @@ class UnitreeGo1RoughEnvCfg_PLAY(UnitreeGo1RoughEnvCfg):
         # remove random pushing event
         self.events.base_external_force_torque = None
         self.events.push_robot = None
+
+
+class UnitreeGo1RoughWaqEnvCfg(UnitreeGo1RoughEnvCfg):
+    pass
+
+class UnitreeGo1RoughWaqEnvCfg_PLAY(UnitreeGo1RoughEnvCfg_PLAY):
+    pass
