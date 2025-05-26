@@ -2,6 +2,47 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+from dataclasses import MISSING
+from typing import Literal
+
+from isaaclab.utils import configclass
+
+
+@configclass
+class CENetCfg:
+    print(">>> CENetCfg >>>")
+    """Configuration for the CENet(VAE) networks.
+    
+        beta = 1.0
+        beta_limit = 4.0
+        learning_rate = 0.01
+        min_lr = 0.0015
+        patience = 100
+        factor = 0.8
+        
+        """
+
+    class_name: str = "CENet"
+    """The policy class name. Default is CENet."""
+
+    beta: float = MISSING
+    """The initial noise standard deviation for the policy."""
+
+    beta_limit: float = MISSING
+    """The upper limit of beta hyperparameter."""
+
+    learning_rate: float = MISSING
+    """The learning rate of the vae network."""
+
+    min_lr: float = MISSING
+    """TODO"""
+    
+    patience: int = MISSING
+    """TODO"""
+
+    factor: float = MISSING
+    """TODO"""
+
 class CenetRolloutStorage:
     class Transition:
         def __init__(self):

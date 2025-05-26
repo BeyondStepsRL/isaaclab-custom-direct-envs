@@ -7,6 +7,7 @@ from isaaclab.utils import configclass
 
 from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
 
+from dreamwaq.vae import CENetCfg
 
 @configclass
 class UnitreeGo1FlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
@@ -75,12 +76,14 @@ class UnitreeGo1WaqPPORunnerCfg(UnitreeGo1RoughPPORunnerCfg):
     save_interval = 50
     experiment_name = "unitree_go1_dreamwaq_direct"
     empirical_normalization = False
+    
     policy = RslRlPpoActorCriticCfg(
         init_noise_std=1.0,
         actor_hidden_dims=[512, 256, 128],
         critic_hidden_dims=[512, 256, 128],
         activation="elu",
     )
+    
     algorithm_type = "dreamwaq"
     algorithm = RslRlPpoAlgorithmCfg(
         value_loss_coef=1.0,
@@ -95,4 +98,13 @@ class UnitreeGo1WaqPPORunnerCfg(UnitreeGo1RoughPPORunnerCfg):
         lam=0.95,
         desired_kl=0.01,
         max_grad_norm=1.0,
+    )
+    
+    vae = CENetCfg(
+        beta = 1.0,
+        beta_limit = 4.0,
+        learning_rate = 0.01,
+        min_lr = 0.0015,
+        patience = 100,
+        factor = 0.8,
     )

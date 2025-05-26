@@ -43,7 +43,7 @@ from rsl_rl.env import VecEnv
 
 from rsl_rl.runners.on_policy_runner import OnPolicyRunner
 
-from dreamwaq.vae import CENet, EstNet
+from dreamwaq.vae import CENet #, EstNet
 from dreamwaq.utils import RunningMeanStd
 
 
@@ -51,7 +51,9 @@ from typing import Optional
 
 class OnPolicyRunnerWAQ(OnPolicyRunner):
     """On-policy runner with WAQ (CENet) integration."""
-
+    
+    # TODO add super class init
+    
     def __init__(
         self,
         env: VecEnv,
@@ -61,11 +63,12 @@ class OnPolicyRunnerWAQ(OnPolicyRunner):
     ):
         # ─── Configs ───────────────────────────────────────────────────────
         # runner-specific config (기존 코드1의 runner 영역)
-        self.cfg = train_cfg.get("runner", train_cfg)
+        self.cfg = train_cfg
+    
         # algorithm/policy/VAE configs
         self.alg_cfg = train_cfg["algorithm"]
         self.policy_cfg = train_cfg["policy"]
-        self.vae_cfg = train_cfg.get("vae", {})
+        self.vae_cfg = train_cfg["vae"] # .get("vae", {})
         
         self.device = device
         self.env = env  # LeggedRobot 환경
@@ -83,6 +86,8 @@ class OnPolicyRunnerWAQ(OnPolicyRunner):
             self.training_type = "distillation"
         else:
             raise ValueError(f"Unknown algorithm class: {alg_class_name}")
+        
+        breakpoint()
         
         # ─── 관측치 차원 계산 ───────────────────────────────────────────────
         obs, extras = self.env.get_observations()

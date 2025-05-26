@@ -1,4 +1,4 @@
-from .cenet import CENet
-from .estnet import EstNet
+from .cenet import CENet, CENetCfg
+# from .estnet import EstNet
 
-__all__ = ["CENet", "EstNet"]
+__all__ = ["CENet", "CENetCfg"]
